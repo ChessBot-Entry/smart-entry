@@ -1,0 +1,97 @@
+#entryCategorysentry {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/assets/images/sentry.svg);
+    background-repeat: no-repeat
+}
+
+.entrySelectedCategory#entryCategorysentry {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/assets/images/sentry_on.svg);
+    background-color: #fe5448;
+    border-color: #fe5448;
+    color: #fff
+}
+
+.propertyTabdebug {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/assets/images/debug_off.png);
+}
+
+.propertyTabdebug.selected {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/assets/images/debug_on.png);
+}
+
+.sentryDebuggerButtons {
+    position: relative;
+    display: table;
+    top: 8px;
+    margin: 0 auto;
+}
+
+.sentryDebuggerButton {
+    width: 32px;
+    height: 32px;
+    background-color: #abc6d6;
+    float: left;
+    margin-left: 2px;
+}
+
+.sentryDebuggerButton:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    margin-left: 0px;
+}
+
+.sentryDebuggerButton:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.sentryDebuggerRun {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/assets/images/debugger_run.png);
+}
+
+.sentryDebuggerStepOver {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/assets/images/debugger_step_over.png);
+}
+
+.sentryDebuggerStepInto {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/assets/images/debugger_step_into.png);
+}
+
+.sentryDebuggerStepOut {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/assets/images/debugger_step_out.png);
+}
+
+.sentryToggleSwitch {
+    width: 100px;
+    height: 50px;
+    display: block;
+    position: relative;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);
+    cursor: pointer;
+}
+
+.sentryToggleSwitch .toggleButton {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: #f03d3d;
+}
+
+.sentryToggleSwitch.active {
+    background: #f03d3d;
+}
+
+.sentryToggleSwitch.active .toggleButton {
+    left: calc(100% - 44px);
+    background: #fff;
+}
+
+.sentryToggleSwitch.active,
+.toggleButton {
+    transition: all 0.2s ease-in;
+}

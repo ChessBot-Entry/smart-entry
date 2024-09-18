@@ -1,0 +1,51 @@
+{
+    "manifest_version": 3,
+    "name": "Smart Entry",
+    "version": "0.0.0",
+    "icons": {
+        "32": "assets/images/icons/Sentry-32px-icon-color.png",
+        "48": "assets/images/icons/Sentry-48px-icon-color.png",
+        "64": "assets/images/icons/Sentry-64px-icon-color.png",
+        "96": "assets/images/icons/Sentry-96px-icon-color.png",
+        "128": "assets/images/icons/Sentry-128px-icon-color.png"
+    },
+    "description": "Entry의 다용도 기능 확장 프로그램입니다.",
+    "content_scripts": [
+        {
+            "run_at": "document_start",
+            "world": "MAIN",
+            "js": [
+                "src/Main.ts"
+            ],
+            "matches": [
+                "https://playentry.org/ws/*",
+                "https://playentry.org/iframe/*"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "assets/images/sentry.svg",
+                "assets/images/sentry_on.svg",
+                "assets/images/debug_off.png",
+                "assets/images/debug_on.png",
+                "assets/images/debugger_run.png",
+                "assets/images/debugger_step_over.png",
+                "assets/images/debugger_step_into.png",
+                "assets/images/debugger_step_out.png"
+            ],
+            "matches": [
+                "https://playentry.org/*"
+            ]
+        }
+    ],
+    "permissions": [
+        "scripting",
+        "tabs",
+        "activeTab"
+    ],
+    "host_permissions": [
+        "https://playentry.org/ws/*"
+    ]
+}

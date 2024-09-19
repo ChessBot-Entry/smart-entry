@@ -13,9 +13,8 @@
     "content_scripts": [
         {
             "run_at": "document_start",
-            "world": "MAIN",
             "js": [
-                "src/Main.ts"
+                "src/Loader.ts"
             ],
             "matches": [
                 "https://playentry.org/ws/*",

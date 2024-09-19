@@ -1,0 +1,3 @@
+[submodule "entryjs"]
+	path = entryjs
+	url = https://github.com/ChessBot-Entry/entryjs.git

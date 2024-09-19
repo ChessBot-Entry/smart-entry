@@ -1,6 +1,6 @@
-## Sentry
+## SmartEntry
 
-**Sentry** 는 한국의 블럭코딩 사이트 [엔트리](https://playentry.org)의 확장프로그램입니다.
+**SmartEntry** 는 한국의 블럭코딩 사이트 [엔트리](https://playentry.org)의 확장프로그램입니다.
 
 
 

@@ -1,5 +1,5 @@
 type Nullable<T> = T | null | undefined;
 
-interface Window {
+declare interface Window {
     SmartEntry?: SmartEntry
 }

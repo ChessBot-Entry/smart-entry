@@ -1,5 +1,5 @@
 type Nullable<T> = T | null | undefined;
 
-declare interface Window {
-    SmartEntry?: SmartEntry
-}
+var SmartEntry: SmartEntry
+var Entry: any
+var Lang: any

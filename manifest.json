@@ -12,7 +12,7 @@
     "description": "Entry의 다용도 기능 확장 프로그램입니다.",
     "content_scripts": [
         {
-            "run_at": "document_start",
+            "run_at": "document_idle",
             "js": [
                 "src/Loader.ts"
             ],
@@ -22,6 +22,19 @@
             ]
         }
     ],
+    "background": {
+        "service_worker": "src/Background.ts"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "32": "assets/images/icons/Sentry-32px-icon-color.png",
+            "48": "assets/images/icons/Sentry-48px-icon-color.png",
+            "64": "assets/images/icons/Sentry-64px-icon-color.png",
+            "96": "assets/images/icons/Sentry-96px-icon-color.png",
+            "128": "assets/images/icons/Sentry-128px-icon-color.png"
+        }
+    },
     "web_accessible_resources": [
         {
             "resources": [
@@ -42,9 +55,11 @@
     "permissions": [
         "scripting",
         "tabs",
-        "activeTab"
+        "activeTab",
+        "storage"
     ],
     "host_permissions": [
-        "https://playentry.org/ws/*"
+        "https://playentry.org/ws/*",
+        "https://playentry.org/iframe/*"
     ]
 }

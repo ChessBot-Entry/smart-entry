@@ -1,8 +1,29 @@
-// tsconfig.json에 type 자동으로 불러오게 해뒀는데 적용이 안됨, 왜지?
+import { ConfigManager } from "./ConfigManager";
+import { HandleGraphicManager } from "./fix/HandleGraphic";
+import { HandleToggleManager } from "./fix/HandleToggle";
+import { makeWrap } from "./utils/Wrap";
 
 export default class SmartEntry {
+    config?: ConfigManager
+
     constructor() {
-        throw Error("Not implemented")
+        console.log("SmartEntry 로드 성공")
+        const config = this.config = new ConfigManager()
+
+        const _initStage = Entry.Stage.prototype.initStage
+        Entry.Stage.prototype.initStage = makeWrap(_initStage, function (callNext, canvas: any) {
+            callNext(canvas)
+            HandleToggleManager.init()
+            HandleGraphicManager.init()
+            Entry.Stage.prototype.initStage = _initStage
+        })
+
+        const _entryInit = Entry.init
+        Entry.init = makeWrap(_entryInit, function(callNext, ...args: any[]) {
+            callNext(...args)
+            config.init()
+            Entry.init = _entryInit
+        })
     }
 }
 

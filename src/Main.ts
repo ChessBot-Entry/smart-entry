@@ -1,6 +1,8 @@
 import SmartEntry from "./js/SmartEntry.ts";
 import { waitForElement } from "./js/Inject.ts";
 
+console.log("test");
+
 (async () => {
     const entryjsFinder = () => {
         for (let script of Array.from(document.scripts)) {
@@ -19,6 +21,8 @@ import { waitForElement } from "./js/Inject.ts";
         }
     }
 
+    console.log("SmartEntry 시작")
+
     const entryjs = await waitForElement(document.body, entryjsFinder,
         { attributes: false, childList: true, subtree: false })
 
@@ -27,9 +31,13 @@ import { waitForElement } from "./js/Inject.ts";
         window.SmartEntry = new SmartEntry()
         return
     }
+    console.log("entry.js 확인")
     
     entryjs.addEventListener('load', () => {
-        if ('Entry' in window) window.SmartEntry = new SmartEntry()
+        if ('Entry' in window) {
+            console.log("SmartEntry 객체 생성")
+            window.SmartEntry = new SmartEntry()
+        }
         else console.warn("Entry 객체를 찾지 못했습니다")
     })
 })()

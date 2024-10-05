@@ -38,6 +38,8 @@ export declare interface IEntry extends EntryOptions {
     Code: any;
     BlockMenuScroller: any;
 
+    init: Function
+
     // 도대체 왜 IEntry가 두 군데에 나눠서 정의돼있는거야??
     Playground: {
         object?: UnknownAny;

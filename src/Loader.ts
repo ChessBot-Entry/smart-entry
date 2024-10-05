@@ -12,3 +12,14 @@ script.src = chrome.runtime.getURL(mainScript)
 script.type = 'module'
 document.head.prepend(script)
 
+chrome.runtime.onMessage.addListener((message) => {
+    console.log(message)
+    window.postMessage({SmartEntryPopup: message})
+})
+
+window.addEventListener("message", (event) => {
+    if (event.data.SmartEntryScript) {
+        console.log(event.data)
+        chrome.runtime.sendMessage(event.data.SmartEntryScript)
+    }
+})

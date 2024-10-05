@@ -38,6 +38,24 @@ export declare interface IEntry extends EntryOptions {
     Code: any;
     BlockMenuScroller: any;
 
+    // 도대체 왜 IEntry가 두 군데에 나눠서 정의돼있는거야??
+    Playground: {
+        object?: UnknownAny;
+        setMenu?: UnknownFunction;
+        resizing: boolean;
+        checkVariables: () => void;
+        hideTabs: () => void;
+        showTabs: () => void;
+    } & Function
+    Stage: {
+        loadDialog(dialog: any): void;
+
+        unloadDialog(dialog: any): void;
+
+        canvas: any;
+        _app: any;
+    } & Function
+
     // 엔트리 내 클래스들
     skeleton: { [name: string]: ISkeleton };
     options: EntryOptions;
@@ -92,8 +110,8 @@ export declare interface IEntry extends EntryOptions {
     type: 'workspace' | string;
 
     // 엔트리에서 네임스페이스에 할당되어있는 특정 함수들
-    addEventListener(type: string, listener: () => void): void;
-    removeEventListener(eventName: string, listener: () => void): void;
+    addEventListener(type: string, listener: (...args: any[]) => void): void;
+    removeEventListener(eventName: string, listener: (...args: any[]) => void): void;
     dispatchEvent(eventName: string, ...args: any): void;
     getMainWS(): UnknownAny | undefined;
     isMobile(): boolean;

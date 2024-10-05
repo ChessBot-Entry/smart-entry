@@ -5,7 +5,8 @@ body {
 
 
 #box{
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
     height: max-content;
     background-color: rgb(238, 238, 238);
     padding: 15px;
@@ -28,6 +29,7 @@ body {
     bottom: 15%;
     background-color: #5F5F5F;
     transition:  background-color 0.3s ease;
+    cursor: pointer;
 }
 
 .inside_toggle{

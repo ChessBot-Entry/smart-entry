@@ -1,4 +1,5 @@
-import { ConfigSetter } from "../config/WsConfigManager"
+import { DefaultConfig } from "../config/Config"
+import { ConfigManager, ConfigSetter } from "../config/WsConfigManager"
 
 interface HandleGraphicSet {
     resizeKnob: createjs.Graphics[]
@@ -14,9 +15,12 @@ export class HandleGraphicManager {
         return HandleGraphicManager._instance
     }
 
-    static init() {
+    static init(enabled?: Boolean, alpha?: number) {
+        enabled = enabled ?? ConfigManager.get("handleGraphic.enabled")
+        alpha = alpha ?? ConfigManager.get("handleGraphic.alpha")
+
         if (!HandleGraphicManager._instance)
-            HandleGraphicManager._instance = new HandleGraphicManager()
+            HandleGraphicManager._instance = new HandleGraphicManager(enabled, alpha)
     }
 
     @ConfigSetter("handleGraphic.enabled")
@@ -32,7 +36,7 @@ export class HandleGraphicManager {
             return newValue
     }
 
-    private constructor() {
+    private constructor(enabled: Boolean, alpha: number) {
         const handle = Entry.stage.handle
         const createJSGraphics: typeof createjs.Graphics = handle.centerPoint.graphics.__proto__.constructor  
 
@@ -52,7 +56,10 @@ export class HandleGraphicManager {
 
             resizeKnobNew.push(newGraphics)
 
-            shape.set({graphics: newGraphics})
+            if (enabled) {
+                shape.set({graphics: newGraphics})
+                shape.alpha = alpha
+            } 
         })
         
         const centerPointBackup = handle.centerPoint.graphics
@@ -62,12 +69,16 @@ export class HandleGraphicManager {
         .beginFill(handle.centerColor)
         .dc(0, 0, 4.5)
 
-        handle.centerPoint.set({graphics: centerPointNew})
+        if (enabled)
+            handle.centerPoint.set({graphics: centerPointNew})
         
         this.rotateKnobScaleBackup = handle.rotateKnob.scaleX
 
-        handle.rotateKnob.scaleX = handle.rotateKnob.scaleY = rotateKnobScaleNew
-
+        if (enabled) {
+            handle.rotateKnob.scaleX = handle.rotateKnob.scaleY = rotateKnobScaleNew
+            handle.rotateKnob.alpha = handle.centerPoint.alpha = handle.directionArrow.alpha = alpha
+        }
+        
         this.backupGraphics = {
             resizeKnob: resizeKnobBackup,
             centerPoint: centerPointBackup

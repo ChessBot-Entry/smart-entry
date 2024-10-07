@@ -1,3 +1,4 @@
+import { ConfigManager } from "./config/WsConfigManager";
 import { HandleGraphicManager } from "./fix/HandleGraphic";
 import { HandleToggleManager } from "./fix/HandleToggle";
 import { makeWrap } from "./utils/Wrap";

@@ -1,4 +1,5 @@
-import { ConfigSetter } from "../config/WsConfigManager"
+import { DefaultConfig } from "../config/Config"
+import { ConfigManager, ConfigSetter } from "../config/WsConfigManager"
 import { makeWrap, WrappedFunc, Wrapper } from "../utils/Wrap"
 
 
@@ -19,9 +20,11 @@ export class HandleToggleManager {
         return HandleToggleManager._instance
     }
 
-    static init() {
+    static init(enabled?: Boolean) {
+        enabled = enabled ?? ConfigManager.get("handleToggle.enabled")
+        
         if (!HandleToggleManager._instance)
-            HandleToggleManager._instance = new HandleToggleManager()
+            HandleToggleManager._instance = new HandleToggleManager(enabled)
     }
 
     @ConfigSetter("handleToggle.enabled")
@@ -29,7 +32,7 @@ export class HandleToggleManager {
         HandleToggleManager._instance?.toggle(value)
     }
 
-    private constructor() {
+    private constructor(enabled: Boolean) {
         const stage = Entry.stage
         const stageHandle = stage.handle
 
@@ -42,12 +45,17 @@ export class HandleToggleManager {
                 Entry.stage.updateObject()
             }
         }
-
+    
         this.ctrlUpListener = (e) => {
             if (e.key === 'Control') {
                 isCtrl = false
                 Entry.stage.updateObject()
             }
+        }
+
+        if (enabled) {
+            Entry.addEventListener('keyPressed', this.ctrlPressListener)
+            Entry.addEventListener('keyUpped', this.ctrlUpListener)
         }
 
         const _editStart = stageHandle.onEditStartFunction
@@ -66,8 +74,10 @@ export class HandleToggleManager {
         stageHandle.onEditStartFunction = makeWrap(_editStart, this.editStartHook)
         stageHandle.onEditEndFunction = makeWrap(_editEnd, this.editEndHook)
 
-        Entry.addEventListener('keyPressed', this.ctrlPressListener)
-        Entry.addEventListener('keyUpped', this.ctrlUpListener)
+        if (!enabled) {
+            stageHandle.onEditStartFunction.toggleWrapper(this.editStartHook, false)
+            stageHandle.onEditEndFunction.toggleWrapper(this.editEndHook, false)
+        }
 
         this.updateObjectHook = function(this: IEntryStage, callNext) {
             const obj = this.selectedObject
@@ -86,7 +96,11 @@ export class HandleToggleManager {
 
         stage.updateObject = makeWrap(stage.updateObject, this.updateObjectHook)
 
-        this.enabled = true
+        if (!enabled) {
+            stage.updateObject.toggleWrapper(this.updateObjectHook, false)
+        }
+
+        this.enabled = enabled
     }
 
     toggle(value: Boolean) {

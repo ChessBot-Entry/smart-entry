@@ -1,6 +1,15 @@
-export type ConfigName = keyof typeof DefaultConfig
+export type ConfigName = keyof ConfigData
 
-export const DefaultConfig = {
+
+// 화나서 인터페이스 추가함
+export interface ConfigData {
+    "handleGraphic.enabled": Boolean
+    "handleGraphic.alpha": number
+
+    "handleToggle.enabled": Boolean
+}
+
+export const DefaultConfig: ConfigData = {
     "handleGraphic.enabled": true,
     "handleGraphic.alpha": 1,
 

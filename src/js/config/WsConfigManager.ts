@@ -1,8 +1,8 @@
-import { ConfigName, DefaultConfig } from "./Config"
+import { ConfigData, ConfigName, DefaultConfig } from "./Config"
 
 export class ConfigManager {
-    storedConfig: Partial<typeof DefaultConfig>
-    private static _instance: ConfigManager
+    storedConfig: Partial<ConfigData>
+    private static _instance?: ConfigManager
 
     static get instance() {
         return ConfigManager._instance
@@ -13,12 +13,22 @@ export class ConfigManager {
             ConfigManager._instance = new ConfigManager()
     }
 
+    // todo: 속성 제대로 나오게 하기
+    static get<T extends ConfigName>(key: T): ConfigData[T] {
+        return ConfigManager._instance?.storedConfig[key] ?? DefaultConfig[key]
+    }
+
     private constructor() {
         this.storedConfig = {}
         window.addEventListener("message", this.onMessage.bind(this))
+        this.postMessage({"initialized": true})
     }
 
-    onMessage(event: any) {
+    private postMessage(message: any) {
+        window.postMessage({SmartEntryScript: message})
+    }
+
+    private onMessage(event: any) {
         if (!event.data.SmartEntryPopup)
             return
 
@@ -31,14 +41,12 @@ export class ConfigManager {
                 if (newVal == null)
                     newVal = data[key]
                 else {
-                    window.postMessage({
-                        SmartEntryScript: {
-                            [key]: data[key]
-                        }
+                    this.postMessage({
+                        [key]: newVal
                     })
                 }
 
-                this.storedConfig[key as ConfigName] == data[key]
+                this.storedConfig[key as ConfigName] == newVal
             }
         }
     }

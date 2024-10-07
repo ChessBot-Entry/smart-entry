@@ -1,3 +1,5 @@
+import { DefaultConfig } from "./js/config/Config"
+
 async function sendMessage(obj: any) {
     const queryTab = await chrome.tabs.query({active: true, currentWindow: true})
     const firstTab = queryTab[0]
@@ -6,18 +8,16 @@ async function sendMessage(obj: any) {
         chrome.tabs.sendMessage(firstTab.id, obj)
 }
 
-chrome.runtime.onMessage.addListener(async (message) => {
+chrome.runtime.onMessage.addListener(async (message, sender) => {
     if (!message.SmartEntryScript)
         return
 
     const data = message.SmartEntryScript
 
     if (data.initialized) {
-        const welcome = {
-            "handleToggle.enabled":  await chrome.storage.sync.get("handleToggle.enabled") || false,
-            "handleGraphic.enabled":  await chrome.storage.sync.get("handleGraphic.enabled") || false
-        }
+        const data = Object.assign(DefaultConfig, await chrome.storage.sync.get())
         
-        sendMessage(welcome)
+        if (sender.tab?.id)
+            chrome.tabs.sendMessage(sender.tab.id, data)
     }
 })

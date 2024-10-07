@@ -6,6 +6,7 @@
 // @ts-expect-error
 import mainScript from "./Main.ts?script&module"
 import './css/Workspace.css';
+import { DefaultConfig } from "./js/config/Config";
 
 const script = document.createElement('script')
 script.src = chrome.runtime.getURL(mainScript)
@@ -17,9 +18,17 @@ chrome.runtime.onMessage.addListener((message) => {
     window.postMessage({SmartEntryPopup: message})
 })
 
-window.addEventListener("message", (event) => {
+window.addEventListener("message", async (event) => {
     if (event.data.SmartEntryScript) {
         console.log(event.data)
-        chrome.runtime.sendMessage(event.data.SmartEntryScript)
+
+        const data = event.data.SmartEntryScript
+
+        if (data.initialized) {
+            const config = Object.assign(DefaultConfig, await chrome.storage.sync.get())
+            window.postMessage({SmartEntryPopup: config})
+        }
+            
+        // chrome.runtime.sendMessage(event.data.SmartEntryScript)
     }
 })

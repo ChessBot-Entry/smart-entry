@@ -89,7 +89,7 @@ export class HandleGraphicManager {
             centerPoint: centerPointNew
         }
 
-        this.enabled = true
+        this.enabled = enabled
     }
 
     toggle(value: Boolean) {

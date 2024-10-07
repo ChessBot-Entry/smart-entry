@@ -1,7 +1,10 @@
 import SmartEntry from "./js/SmartEntry.ts";
 import { waitForElement } from "./js/Inject.ts";
+import { ConfigManager } from "./js/config/WsConfigManager";
 
 console.log("test");
+
+ConfigManager.init();
 
 (async () => {
     const entryjsFinder = () => {

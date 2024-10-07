@@ -1,9 +1,17 @@
+// todo: ts로 변경 + react 적용 + js에서 옵션 생성하게
+
+import { DefaultConfig } from "./js/config/Config"
+
 async function sendMessage(obj) {
     const queryTab = await chrome.tabs.query({active: true, currentWindow: true})
     const firstTab = queryTab[0]
     
     if (firstTab && firstTab.id)
         chrome.tabs.sendMessage(firstTab.id, obj)
+}
+
+async function getConfig(key) {
+    return await chrome.storage.sync.get(key)[key]
 }
 
 function setToggleAnimation() {
@@ -39,12 +47,13 @@ function setToggleAnimation() {
 }
 
 async function initConfig() {
+    const config = await chrome.storage.sync.get()
     {
         const select = document.querySelector('#handleToggle')
         const toggle =  select.querySelector('.toggle_btn')
 
-        let enabled = (await chrome.storage.sync.get("handleToggle.enabled"))["handleToggle.enabled"]
-        if (enabled == null) enabled = true
+        let enabled = config["handleToggle.enabled"]
+        if (enabled == null) enabled = DefaultConfig["handleToggle.enabled"]
         
         toggle.checked = enabled
 
@@ -58,8 +67,8 @@ async function initConfig() {
         const select = document.querySelector('#handleGraphic')
         const toggle =  select.querySelector('.toggle_btn')
 
-        let enabled = (await chrome.storage.sync.get("handleGraphic.enabled"))["handleGraphic.enabled"]
-        if (enabled == null) enabled = false
+        let enabled = config["handleGraphic.enabled"]
+        if (enabled == null) enabled = DefaultConfig["handleGraphic.enabled"]
         
         toggle.checked = enabled
 
@@ -70,6 +79,8 @@ async function initConfig() {
     }
 
     setToggleAnimation()
+
+    document.querySelector("#toggleFieldset").disabled = false
 }
 
 initConfig()

@@ -1,3 +1,4 @@
+import { ConfigSetter } from "../config/WsConfigManager"
 import { makeWrap, WrappedFunc, Wrapper } from "../utils/Wrap"
 
 
@@ -12,7 +13,7 @@ interface IEntryStage {
 }
 
 export class HandleToggleManager {
-    private static _instance: HandleToggleManager
+    private static _instance?: HandleToggleManager
 
     static get instance() {
         return HandleToggleManager._instance
@@ -21,6 +22,11 @@ export class HandleToggleManager {
     static init() {
         if (!HandleToggleManager._instance)
             HandleToggleManager._instance = new HandleToggleManager()
+    }
+
+    @ConfigSetter("handleToggle.enabled")
+    static toggle(value: Boolean) {
+        HandleToggleManager._instance?.toggle(value)
     }
 
     private constructor() {

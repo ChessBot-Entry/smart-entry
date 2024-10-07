@@ -1,3 +1,4 @@
+import { ConfigSetter } from "../config/WsConfigManager"
 
 interface HandleGraphicSet {
     resizeKnob: createjs.Graphics[]
@@ -7,7 +8,7 @@ interface HandleGraphicSet {
 const rotateKnobScaleNew = 0.3
 
 export class HandleGraphicManager {
-    private static _instance: HandleGraphicManager
+    private static _instance?: HandleGraphicManager
 
     static get instance() {
         return HandleGraphicManager._instance
@@ -16,6 +17,19 @@ export class HandleGraphicManager {
     static init() {
         if (!HandleGraphicManager._instance)
             HandleGraphicManager._instance = new HandleGraphicManager()
+    }
+
+    @ConfigSetter("handleGraphic.enabled")
+    static toggle(value: Boolean) {
+        HandleGraphicManager._instance?.toggle(value)
+    }
+
+    @ConfigSetter("handleGraphic.alpha")
+    static setAlpha(value: number) {
+        const newValue = Math.max(Math.min(value, 1), 0)
+        HandleGraphicManager._instance?.setAlpha(newValue)
+        if (newValue != value)
+            return newValue
     }
 
     private constructor() {

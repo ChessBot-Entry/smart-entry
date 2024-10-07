@@ -46,7 +46,7 @@ export class ConfigManager {
                     })
                 }
 
-                this.storedConfig[key as ConfigName] == newVal
+                this.storedConfig[key as ConfigName] = newVal
             }
         }
     }

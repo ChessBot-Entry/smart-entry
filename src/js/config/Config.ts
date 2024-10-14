@@ -3,10 +3,10 @@ export type ConfigName = keyof ConfigData
 
 // 화나서 인터페이스 추가함
 export interface ConfigData {
-    "handleGraphic.enabled": Boolean
+    "handleGraphic.enabled": boolean
     "handleGraphic.alpha": number
 
-    "handleToggle.enabled": Boolean
+    "handleToggle.enabled": boolean
 }
 
 export const DefaultConfig: ConfigData = {

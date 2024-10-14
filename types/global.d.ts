@@ -1,3 +1,5 @@
+/* eslint no-var: "off" */
+
 import { IEntry } from "./entryjs/entry";
 
 declare global {

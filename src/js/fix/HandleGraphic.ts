@@ -15,7 +15,7 @@ export class HandleGraphicManager {
         return HandleGraphicManager._instance
     }
 
-    static init(enabled?: Boolean, alpha?: number) {
+    static init(enabled?: boolean, alpha?: number) {
         enabled = enabled ?? ConfigManager.get("handleGraphic.enabled")
         alpha = alpha ?? ConfigManager.get("handleGraphic.alpha")
 
@@ -24,7 +24,7 @@ export class HandleGraphicManager {
     }
 
     @ConfigSetter("handleGraphic.enabled")
-    static toggle(value: Boolean) {
+    static toggle(value: boolean) {
         HandleGraphicManager._instance?.toggle(value)
     }
 
@@ -36,7 +36,7 @@ export class HandleGraphicManager {
             return newValue
     }
 
-    private constructor(enabled: Boolean, alpha: number) {
+    private constructor(enabled: boolean, alpha: number) {
         const handle = Entry.stage.handle
         const createJSGraphics: typeof createjs.Graphics = handle.centerPoint.graphics.__proto__.constructor  
 
@@ -92,7 +92,7 @@ export class HandleGraphicManager {
         this.enabled = enabled
     }
 
-    toggle(value: Boolean) {
+    toggle(value: boolean) {
         if (value === this.enabled)
             return
 
@@ -136,7 +136,7 @@ export class HandleGraphicManager {
         Entry.stage.updateObject()
     }
 
-    private enabled: Boolean = false
+    private enabled: boolean = false
 
     private newAlpha: number = 1
     private rotateKnobScaleBackup: number

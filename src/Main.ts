@@ -8,10 +8,10 @@ ConfigManager.init();
 
 (async () => {
     const entryjsFinder = () => {
-        for (let script of Array.from(document.scripts)) {
+        for (const script of Array.from(document.scripts)) {
             if (!script.src) continue
 
-            let loc = script.src.split('/')
+            const loc = script.src.split('/')
             let file = loc.pop()
 
             if (file == undefined) continue

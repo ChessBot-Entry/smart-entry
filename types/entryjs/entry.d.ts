@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /// <reference path="./index.d.ts" />
 
 import { ISkeleton, EntryBlock, UnknownAny } from './index';

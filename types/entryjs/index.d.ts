@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // TODO 이 아래 타입들이 붙어있으면 그냥 아직 몰라서 붙인 타입입니다. 수정이 필요합니다.
 declare type UnknownAny = any;
 declare type UnknownFunction = (...args: any[]) => any;

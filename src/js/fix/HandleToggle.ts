@@ -20,7 +20,7 @@ export class HandleToggleManager {
         return HandleToggleManager._instance
     }
 
-    static init(enabled?: Boolean) {
+    static init(enabled?: boolean) {
         enabled = enabled ?? ConfigManager.get("handleToggle.enabled")
         
         if (!HandleToggleManager._instance)
@@ -28,11 +28,11 @@ export class HandleToggleManager {
     }
 
     @ConfigSetter("handleToggle.enabled")
-    static toggle(value: Boolean) {
+    static toggle(value: boolean) {
         HandleToggleManager._instance?.toggle(value)
     }
 
-    private constructor(enabled: Boolean) {
+    private constructor(enabled: boolean) {
         const stage = Entry.stage
         const stageHandle = stage.handle
 
@@ -103,7 +103,7 @@ export class HandleToggleManager {
         this.enabled = enabled
     }
 
-    toggle(value: Boolean) {
+    toggle(value: boolean) {
         if (value === this.enabled)
             return
 
@@ -128,7 +128,7 @@ export class HandleToggleManager {
         stage.updateObject()
     }
 
-    private enabled: Boolean = false
+    private enabled: boolean = false
 
     private updateObjectHook: Wrapper<Function>
     private editStartHook: Wrapper<Function>

@@ -6,7 +6,7 @@ type FuncThis<F extends Function> = F extends (this: infer P, ...args: any) => a
 export type Wrapper<F extends Function> = (this: FuncThis<F>, callNext: (...args: FuncArgs<F>) => FuncRet<F>, ...args: FuncArgs<F>) => FuncRet<F>
 
 interface WrapChainContext<F extends Function> {
-    wrapper: Wrapper<F>, enabled: Boolean
+    wrapper: Wrapper<F>, enabled: boolean
 }
 type WrapChain<F extends Function> = Array<WrapChainContext<F>>;
 
@@ -20,7 +20,7 @@ interface IWrappedFunc<F extends Function> extends Function {
     [wrapperSymbol]: WrapData<F>,
     unwrap: (wrapper: Wrapper<F>) => void,
     wrap: (wrapper: Wrapper<F>) => void,
-    toggleWrapper: (wrapper: Wrapper<F>, enabled: Boolean) => void
+    toggleWrapper: (wrapper: Wrapper<F>, enabled: boolean) => void
 }
 
 export type WrappedFunc<F extends Function> = IWrappedFunc<F> & F;
@@ -68,7 +68,7 @@ export const makeWrap = <F extends Function>(dest: F, wrapper: Wrapper<F>): Wrap
     return (wrappedFunc as unknown as WrappedFunc<F>)
 }
 
-const toggleWrapper = <F extends Function>(wrapChain: WrapChain<F>, wrapper: Wrapper<F>, enabled: Boolean) => {
+const toggleWrapper = <F extends Function>(wrapChain: WrapChain<F>, wrapper: Wrapper<F>, enabled: boolean) => {
     for (let i = 0; i < wrapChain.length; i++) {
         if (wrapChain[i].wrapper === wrapper) {
             wrapChain[i].enabled = enabled

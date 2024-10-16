@@ -4,28 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Entry</title>
-    <link rel="stylesheet" href="popup.css">
-    <script type="module" src="src/Popup.js"></script>
+    <!-- <link rel="stylesheet" href="popup.css"> -->
+    <!-- <script type="module" src="src/Popup.js"></script> -->
 </head>
 <body>
-    <div id="box">
-        <fieldset id="toggleFieldset" disabled>
-            <div id="handleToggle" class="select">
-                오브젝트 조절 Ctrl로만 보이게 하기 
-                <span class="toggle">
-                    <span class="inside_toggle"></span>
-                </span>
-                <input type="checkbox" name="diehd"  class="toggle_btn" hidden>
-            </div>
-
-            <div id="handleGraphic" class="select">
-                더 나은 오브젝트 조절 버튼 그래픽
-                <span class="toggle">
-                    <span class="inside_toggle"></span>
-                </span>
-                <input type="checkbox" name="select"  class="toggle_btn" hidden>
-            </div>
-        </fieldset>
-    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/Popup.tsx"></script>
 </body>
 </html>

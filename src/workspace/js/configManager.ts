@@ -1,4 +1,4 @@
-import { ConfigData, ConfigName, DefaultConfig } from "./Config"
+import { ConfigData, ConfigName, DefaultConfig } from "src/common/config"
 
 export class ConfigManager {
     storedConfig: Partial<ConfigData>

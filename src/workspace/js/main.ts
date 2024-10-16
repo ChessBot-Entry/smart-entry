@@ -1,6 +1,6 @@
-import SmartEntry from "./js/SmartEntry.ts";
-import { waitForElement } from "./js/Inject.ts";
-import { ConfigManager } from "./js/config/WsConfigManager";
+import SmartEntry from "./smartEntry.ts";
+import { waitForElement } from "./inject.ts";
+import { ConfigManager } from "./configManager";
 
 console.log("test");
 

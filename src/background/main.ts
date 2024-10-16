@@ -1,6 +1,5 @@
-import { DefaultConfig } from "./js/config/Config"
+import { DefaultConfig } from 'src/common/config.ts'
 
-// eslint-disable-next-line
 async function sendMessage(obj: any) {
     const queryTab = await chrome.tabs.query({active: true, currentWindow: true})
     const firstTab = queryTab[0]

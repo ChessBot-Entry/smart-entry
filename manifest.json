@@ -14,7 +14,7 @@
         {
             "run_at": "document_idle",
             "js": [
-                "src/Loader.ts"
+                "src/workspace/js/loader.ts"
             ],
             "matches": [
                 "https://playentry.org/ws/*",
@@ -23,10 +23,10 @@
         }
     ],
     "background": {
-        "service_worker": "src/Background.ts"
+        "service_worker": "src/background/main.ts"
     },
     "action": {
-        "default_popup": "popup.html",
+        "default_popup": "src/popup/html/main.html",
         "default_icon": {
             "32": "assets/images/icons/Sentry-32px-icon-color.png",
             "48": "assets/images/icons/Sentry-48px-icon-color.png",

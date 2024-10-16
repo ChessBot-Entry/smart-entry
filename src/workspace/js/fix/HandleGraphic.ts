@@ -1,5 +1,5 @@
-import { DefaultConfig } from "../config/Config"
-import { ConfigManager, ConfigSetter } from "../config/WsConfigManager"
+import { DefaultConfig } from "../../../common/config"
+import { ConfigManager, ConfigSetter } from "../configManager"
 
 interface HandleGraphicSet {
     resizeKnob: createjs.Graphics[]

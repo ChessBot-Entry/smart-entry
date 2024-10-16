@@ -1,6 +1,6 @@
-import { DefaultConfig } from "../config/Config"
-import { ConfigManager, ConfigSetter } from "../config/WsConfigManager"
-import { makeWrap, WrappedFunc, Wrapper } from "../utils/Wrap"
+import { DefaultConfig } from "../../../common/config"
+import { ConfigManager, ConfigSetter } from "../configManager"
+import { makeWrap, WrappedFunc, Wrapper } from "../../../common/utils/Wrap"
 
 
 // todo: d.ts로 이동

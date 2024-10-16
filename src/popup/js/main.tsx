@@ -1,6 +1,6 @@
 import { StrictMode, Suspense, useState } from 'react'
-import './css/popup.css'
-import { ConfigData, ConfigName, ConfigUI, ConfigUIInfo, ConfigUIType, DefaultConfig } from './js/config/Config'
+import '../css/popup.css'
+import { ConfigData, ConfigName, ConfigUI, ConfigUIInfo, ConfigUIType, DefaultConfig } from 'src/common/config'
 import { createRoot } from 'react-dom/client'
 
 const sendMessage = async (value: any) => {

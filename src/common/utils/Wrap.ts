@@ -1,5 +1,5 @@
 
-type FuncArgs<F extends Function> = F extends (...args: infer P) => any ? P : any
+type FuncArgs<F extends Function> = F extends (...args: infer P) => any ? P : any[]
 type FuncRet<F extends Function> = F extends (...args: any) => infer P ? P : any
 type FuncThis<F extends Function> = F extends (this: infer P, ...args: any) => any ? P : any
 

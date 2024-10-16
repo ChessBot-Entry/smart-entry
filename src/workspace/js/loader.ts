@@ -4,9 +4,9 @@
 // crx를 빼던가, 포크해서 고치던가, pr 적용 기다리던가
 
 // @ts-expect-error crxjs 전용
-import mainScript from "./Main.ts?script&module"
-import './css/Workspace.css';
-import { DefaultConfig } from "./js/config/Config";
+import mainScript from "./main.ts?script&module"
+import '../css/workspace.css';
+import { DefaultConfig } from "src/common/config";
 
 const script = document.createElement('script')
 script.src = chrome.runtime.getURL(mainScript)

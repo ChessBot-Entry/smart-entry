@@ -132,6 +132,9 @@ export class HandleGraphicManager {
     setAlpha(value: number) {
         const handle = Entry.stage.handle
         handle.rotateKnob.alpha = handle.centerPoint.alpha = handle.directionArrow.alpha = this.newAlpha = value
+        handle.knobs.forEach((shape: createjs.Shape, idx: number) => {
+            shape.alpha = value
+        })
 
         Entry.stage.updateObject()
     }

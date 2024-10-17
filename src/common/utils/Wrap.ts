@@ -1,7 +1,7 @@
 
 type FuncArgs<F extends Function> = F extends (...args: infer P) => any ? P : unknown[]
-type FuncRet<F extends Function> = F extends (...args: any) => infer P ? P : unknown
-type FuncThis<F extends Function> = F extends (this: infer P, ...args: any) => any ? P : unknown
+type FuncRet<F extends Function> = F extends (...args: any) => infer P ? P : any
+type FuncThis<F extends Function> = F extends (this: infer P, ...args: any) => any ? P : any
 
 export type Wrapper<F extends Function> = (this: FuncThis<F>, callNext: (...args: FuncArgs<F>) => FuncRet<F>, ...args: FuncArgs<F>) => FuncRet<F>
 

@@ -1,5 +1,5 @@
 import { ReactElement, useState } from "react";
-import { ConfigName, ConfigUIRealType, ConfigUIType } from "src/common/config";
+import { ConfigInfo, ConfigName, ConfigUIData, ConfigUIRealType, ConfigUIType } from "src/common/config";
 import styled from 'styled-components';
 import { sendMessage } from 'src/common/utils/utils'
 
@@ -63,5 +63,27 @@ export function ConfigToggleButton({id, defaultValue}: PopupComponentArg<"boolea
             <ToggleCircle className={checked ? "checked" : ""} />
         </ToggleBackground>
     </ToggleContainer>
+    )
+}
+
+const Slider = styled.input`
+    position: absolute;
+    accent-color: #FE5448;
+    right: 5%;
+`
+
+export function ConfigSlider({id, defaultValue}: PopupComponentArg<"range">): PopupComponentType<"range"> {
+    const [value, setValue] = useState(defaultValue)
+    const [min, max, step = 1, stepForced = false] = (ConfigInfo[id] as ConfigUIData<"range">).range
+
+    const onInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = parseFloat(event.target.value)
+        setValue(newValue)
+        sendMessage({[id]: newValue})
+        chrome.storage.sync.set({[id]: newValue})
+    }
+
+    return (
+        <Slider type="range" min={min} max={max} step={step} defaultValue={value} onInput={onInput}/>
     )
 }

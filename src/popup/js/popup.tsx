@@ -1,7 +1,7 @@
 import loading_image from "assets/images/loading.svg"
 import { Suspense } from "react"
 import { ConfigData, ConfigInfo, ConfigName, ConfigUI, ConfigUIType, DefaultConfig } from "src/common/config"
-import { ConfigToggleButton } from "./popupComponent"
+import { ConfigSlider, ConfigToggleButton } from "./popupComponent"
 import styled from "styled-components"
 
 const configPromise = readConfig()
@@ -31,7 +31,7 @@ function PopupConfig() {
     const configComponentMap: Record<ConfigUIType, ((id: ConfigName, value: any) => React.JSX.Element) | null> = {
         "boolean": (id, value) => <ConfigToggleButton id={id} defaultValue={value}/>,
         "number": null,
-        "range": null
+        "range": (id, value) => <ConfigSlider id={id} defaultValue={value}/>
     }
 
     const configComponents = ConfigUI.map(id => {

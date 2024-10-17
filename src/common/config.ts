@@ -1,4 +1,8 @@
-export const ConfigInfo: Record<string, ConfigUIDataAll> = {
+function AddTypeGuard<T extends Record<string, ConfigUIDataAll>>(input: T) {
+    return input
+}
+
+export const ConfigInfo = AddTypeGuard({
     "handleGraphic.enabled": {
         type: "boolean",
         name: "더 나은 오브젝트 조절",
@@ -9,7 +13,8 @@ export const ConfigInfo: Record<string, ConfigUIDataAll> = {
         type: "range",
         name: "오브젝트 조절 투명도",
         description: "오브젝트 조절 버튼의 투명도를 설정합니다.",
-        defaultValue: 1
+        defaultValue: 1,
+        range: [0, 100, 0.5, false]
     },
 
     "handleToggle.enabled": {
@@ -18,14 +23,19 @@ export const ConfigInfo: Record<string, ConfigUIDataAll> = {
         description: "오브젝트 조절을 Ctrl 키로 가능하게 합니다.",
         defaultValue: false
     }
-} as const
-
+})
 
 export interface ConfigUIRealType {
     "boolean": boolean
     "range": number
     "number": number
 }
+
+type ConfigUIDataAdditionalRecord = {
+    "range": { range: [number, number, number?, boolean?] }
+} & Record<ConfigUIType, unknown>
+
+export type ConfigUIData<T extends ConfigUIType> = ConfigUIDataDefault<T> & ConfigUIDataAdditionalRecord[T]
 
 // 자동으로 추론시키는 법을 모르겠네
 type ConfigUIDataAll = ConfigUIData<"number">
@@ -40,7 +50,7 @@ export type ConfigData = {
     [T in ConfigName] : typeof ConfigInfo[T]
 }
 
-export interface ConfigUIData<T extends ConfigUIType> {
+interface ConfigUIDataDefault<T extends ConfigUIType> {
     type: T
     name: string
     description: string
@@ -49,6 +59,7 @@ export interface ConfigUIData<T extends ConfigUIType> {
 
 export const ConfigUI:ConfigName[] = [
     "handleGraphic.enabled",
+    "handleGraphic.alpha",
     "handleToggle.enabled"
 ]
 

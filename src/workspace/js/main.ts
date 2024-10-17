@@ -2,8 +2,6 @@ import SmartEntry from "./smartEntry.ts";
 import { waitForElement } from "./inject.ts";
 import { ConfigManager } from "./configManager";
 
-console.log("test");
-
 ConfigManager.init();
 
 (async () => {

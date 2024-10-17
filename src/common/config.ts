@@ -47,7 +47,7 @@ export type ConfigUIType = keyof ConfigUIRealType
 export type ConfigName = keyof typeof ConfigInfo 
 
 export type ConfigData = {
-    [T in ConfigName] : typeof ConfigInfo[T]
+    [T in ConfigName] : ConfigUIRealType[typeof ConfigInfo[T]["type"]]
 }
 
 interface ConfigUIDataDefault<T extends ConfigUIType> {

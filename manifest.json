@@ -38,14 +38,7 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "assets/images/sentry.svg",
-                "assets/images/sentry_on.svg",
-                "assets/images/debug_off.png",
-                "assets/images/debug_on.png",
-                "assets/images/debugger_run.png",
-                "assets/images/debugger_step_over.png",
-                "assets/images/debugger_step_into.png",
-                "assets/images/debugger_step_out.png"
+                "assets/images/*"
             ],
             "matches": [
                 "https://playentry.org/*"

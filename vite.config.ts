@@ -11,9 +11,10 @@ manifest.version = package_json.version
 export default defineConfig({
   plugins: [react(), crx({ manifest }), babel()],
   resolve: {
-    alias: [{
-      find: "src", replacement: path.resolve(__dirname, "src")
-    }]
+    alias: [
+      { find: "src", replacement: path.resolve(__dirname, "src") },
+      { find: "assets", replacement: path.resolve(__dirname, "assets") },
+    ]
   },
   build: {
     minify: 'terser',

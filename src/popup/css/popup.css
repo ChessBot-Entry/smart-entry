@@ -3,50 +3,13 @@ body {
     height: 400px;
 }
 
-
 #box{
-    width: 90%;
+    width: 90% !important;
+    max-height: 1000px !important;
     margin: 0 auto;
     height: max-content;
     background-color: rgb(238, 238, 238);
     padding: 15px;
     border-radius: 10px;
     box-shadow: #00000070 0px 0px 10px 0px;
-}
-
-.select{
-    position: relative;
-    padding: 5px 0px 5px 0px;
-
-}
-
-.toggle{
-    position: absolute;
-    width: 40px;
-    height: 20px;
-    border-radius: 20px;
-    right: 0%;
-    bottom: 15%;
-    background-color: #5F5F5F;
-    transition:  background-color 0.3s ease;
-    cursor: pointer;
-}
-
-.toggle-checked{
-    background-color: #FE5448;
-}
-
-.inside-toggle{
-    position: absolute;
-    width: 13px;
-    height: 13px;
-    border-radius: 20px;
-    right: 57%;
-    bottom: 17%;
-    background-color: rgb(255, 255, 255);
-    transition: transform 0.3s ease;
-}
-
-.inside-toggle-checked{
-   transform: translateX(19px);
 }

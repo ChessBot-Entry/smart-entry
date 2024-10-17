@@ -14,7 +14,7 @@ export const ConfigInfo = AddTypeGuard({
         name: "오브젝트 조절 투명도",
         description: "오브젝트 조절 버튼의 투명도를 설정합니다.",
         defaultValue: 1,
-        range: [0, 100, 0.5, false]
+        range: [0, 1, 0.005, false]
     },
 
     "handleToggle.enabled": {

@@ -15,7 +15,7 @@ async function readConfig() {
 
 const ConfigContainer = styled.div`
 align-items: center;
-padding: 8px 0px 8px 0px;
+padding: 12px 0px 12px 0px;
 `;
 
 const ConfigDescription = styled.p`
@@ -41,8 +41,10 @@ function PopupConfig() {
         return (
             <div>
                 <ConfigContainer>
-                    <span style={{fontWeight: 'bold'}}>{ info.name }</span>
-                    { targetComponent?.(id, currentConfig[id]) ?? null }
+                    <div style={{height: '25px'}}>
+                        <span style={{fontWeight: 'bold'}}>{ info.name }</span>
+                        { targetComponent?.(id, currentConfig[id]) ?? null }
+                    </div>
                     <ConfigDescription>
                         { info.description }
                     </ConfigDescription>

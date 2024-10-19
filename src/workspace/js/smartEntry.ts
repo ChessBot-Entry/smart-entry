@@ -1,6 +1,6 @@
 import { HandleGraphicManager } from "./fix/HandleGraphic";
 import { HandleToggleManager } from "./fix/HandleToggle";
-import { makeWrap } from "src/common/utils/Wrap";
+import { makeWrap } from "src/common/utils/wrap";
 
 export default class SmartEntry {
     constructor() {

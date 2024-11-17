@@ -75,6 +75,7 @@ class DropdownSearch {
         }
 
         this.applyQuery(null)
+        this.input.focus()
     }
 
     query(value: string, query: string): boolean {
@@ -232,6 +233,14 @@ class DropdownSearch {
                 const nextItem = this.queryElemList[nextIdx]
 
                 this.changeSelectedItem(nextItem)
+
+                if (nextItem) {
+                    nextItem.tabIndex = 0
+                    nextItem.focus()
+                    nextItem.tabIndex = -1
+
+                    this.input.focus()
+                }
                 
                 break
             }

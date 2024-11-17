@@ -64,6 +64,17 @@ class DropdownSearch {
 
         this.input.addEventListener('input', () => this.onInput())
         this.input.addEventListener('keydown', (ev) => this.onKeydown(ev))
+
+        const listElem = this.getListElem()
+
+        if (!listElem)
+            throw ReferenceError("listElem이 존재하지 않습니다.")
+
+        for (const item of listElem.childNodes) {
+            item.addEventListener('mousemove', (ev) => this.changeSelectedItem(ev.target as HTMLElement))
+        }
+
+        this.applyQuery(null)
     }
 
     query(value: string, query: string): boolean {

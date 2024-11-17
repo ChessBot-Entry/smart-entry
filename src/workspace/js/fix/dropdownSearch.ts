@@ -14,7 +14,14 @@ export class DropdownSearchManager {
 
     private constructor() {
         const dropdownDynamicCtor = Entry.FieldDropdownDynamic.prototype
-        dropdownDynamicCtor.renderOptions = makeWrap(dropdownDynamicCtor.renderOptions, (callNext, ...args) => {
+        dropdownDynamicCtor.renderOptions = makeWrap(dropdownDynamicCtor.renderOptions, function (callNext, ...args) {
+            callNext(...args)
+            this.dropdownSearch = new DropdownSearch(this.dropdownWidget._container.querySelector(".widget > div > div"))
+        })
+
+        dropdownDynamicCtor.destroyOption = makeWrap(dropdownDynamicCtor.destroyOption, function (callNext, ...args) {
+            this.dropdownSearch?.destroy()
+            this.dropdownSearch = null
             callNext(...args)
         })
     }
@@ -34,10 +41,11 @@ class DropdownSearch {
         this.target = target
         this.scrollbar = this.target.querySelector<HTMLElement>('div > div')
 
-        if (!this.scrollbar || this.scrollbar.className.includes('scrollbar'))
+        if (!this.scrollbar || !this.scrollbar.className.includes('scrollbar'))
             this.scrollbar = null
 
         this.input = document.createElement('input')
+        this.target.prepend(this.input)
 
         // @ts-expect-error 스타일 그냥 쓸 수 있게 좀 해줘라 제발
         this.input.style = `
@@ -217,5 +225,9 @@ class DropdownSearch {
                 break
             }
         }
+    }
+
+    destroy() {
+        this.input.remove()
     }
 }

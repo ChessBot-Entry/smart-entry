@@ -1,3 +1,4 @@
+import { DropdownSearchManager } from "./fix/dropdownSearch";
 import { HandleGraphicManager } from "./fix/HandleGraphic";
 import { HandleToggleManager } from "./fix/HandleToggle";
 import { makeWrap } from "src/common/utils/wrap";
@@ -11,6 +12,7 @@ export default class SmartEntry {
             callNext(canvas)
             HandleToggleManager.init()
             HandleGraphicManager.init()
+            DropdownSearchManager.init()
             Entry.Stage.prototype.initStage = _initStage
         })
 

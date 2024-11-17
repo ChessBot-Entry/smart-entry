@@ -61,7 +61,35 @@ class DropdownSearch {
     }
 
     query(value: string, query: string): boolean {
-        return true
+        function splitKorean(text: string) {
+            const CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"
+            const JUNG = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ"
+            const JONG = "　ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ"
+      
+            const splitedArr = text.split('')
+      
+            for (let i = splitedArr.length - 1; i >= 0; i--) {
+              let num = text.charCodeAt(i)
+              if (num >= 0xAC00 && num <= 0xD7A3) {
+                num -= 0xAC00
+                const curCho = Math.floor(num / JONG.length / JUNG.length)
+                const curJung = Math.floor(num / JONG.length % JUNG.length)
+                const curJong = num % JONG.length
+      
+                let splitedChr
+      
+                if (curJong !== 0)
+                  splitedChr = [CHO[curCho], JUNG[curJung], JONG[curJong]]
+                else
+                splitedChr = [CHO[curCho], JUNG[curJung]]
+      
+                splitedArr.splice(i, 1, ...splitedChr)
+              }
+            }
+      
+            return splitedArr.join('')
+          }
+          return splitKorean(value.toLowerCase()).includes(splitKorean(query.toLowerCase()))
     }
 
     changeSelectedItem(elem: HTMLElement | null) {

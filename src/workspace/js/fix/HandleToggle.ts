@@ -63,12 +63,12 @@ export class HandleToggleManager {
 
         this.editStartHook = function(callNext, ...args) {
             isEdit = true
-            return callNext(args)
+            return callNext(...args)
         }
 
         this.editEndHook = function(callNext, ...args) {
             isEdit = false
-            return callNext(args)
+            return callNext(...args)
         }
 
         stageHandle.onEditStartFunction = makeWrap(_editStart, this.editStartHook)

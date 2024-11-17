@@ -16,7 +16,6 @@ export class DropdownSearchManager {
         const dropdownDynamicCtor = Entry.FieldDropdownDynamic.prototype
         dropdownDynamicCtor.renderOptions = makeWrap(dropdownDynamicCtor.renderOptions, (callNext, ...args) => {
             callNext(...args)
-            
         })
     }
 }
@@ -27,7 +26,6 @@ class DropdownSearch {
     private input: HTMLInputElement
 
     private queryElemList: HTMLElement[] = []
-    private isQuery: boolean = false
     
     private selectedItem: Nullable<HTMLElement>
     private selectedIdx:number = -1

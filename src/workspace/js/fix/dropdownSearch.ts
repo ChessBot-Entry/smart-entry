@@ -241,6 +241,8 @@ class DropdownSearch {
 
                     this.input.focus()
                 }
+
+                event.preventDefault()
                 
                 break
             }

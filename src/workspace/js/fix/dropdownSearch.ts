@@ -39,7 +39,7 @@ class DropdownSearch {
 
     constructor(target: HTMLElement) {
         this.target = target
-        this.scrollbar = this.target.querySelector<HTMLElement>('div > div')
+        this.scrollbar = this.target.querySelector<HTMLElement>(':scope > div > div')
 
         if (!this.scrollbar || !this.scrollbar.className.includes('scrollbar'))
             this.scrollbar = null

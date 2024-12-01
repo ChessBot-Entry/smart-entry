@@ -242,6 +242,7 @@ class DropdownSearch {
                     this.input.focus()
                 }
 
+                // TODO: 한글 입력 중 화살표 키 사용 시 중복 입력 해결
                 event.preventDefault()
                 
                 break
